@@ -1,9 +1,148 @@
 <!DOCTYPE html>
 <html>
+<style>
+    .row {
+        display: flex;
+    }
+
+    .column {
+        padding: 10px;
+        margin: 10px;
+        border-radius: 15px;
+        background-color: white;
+    }
+
+    .specialColumn {
+        padding: 10px;
+        margin: 10px;
+        background-color: black;
+        border: 50px solid transparent;
+        border-image: url(wood_border.jpg) 27 stretch;
+        border-width: 50px;
+        flex: 85%;
+    }
+
+    #test {
+        padding: 0px;
+        margin: 0px;
+        font-size: 0px;
+    }
+
+    #iValue {
+        padding: 0px;
+        margin: 0px;
+        font-size: 0px;
+    }
+
+    @font-face {
+        font-family: chef;
+        src: url("KR Chef.ttf");
+    }
+
+    @font-face {
+        font-family: chalk;
+        src: url("chawp.ttf");
+    }
+
+    body {
+        margin-left: 100px;
+        margin-right: 100px;
+        margin-top: 10px;
+        background-image: url("food_background3.jpg");
+        font-size: 12px;
+    }
+
+    h1 {
+        margin: 0px;
+        padding: 10px;
+        font-size: 10em;
+        font-family: chef;
+        color: black;
+        text-align: center;
+        background-color: white;
+        border-radius: 10px;
+    }
+
+    h2 {
+        margin: 0px;
+        padding: 10px;
+        font-size: 3em;
+        text-align: center;
+    }
+
+    #specialHeader2 {
+        margin: 0px;
+        padding: 10px;
+        font-size: 3em;
+        text-align: center;
+        border-radius: 15px;
+        background-color: white;
+    }
+
+    #title {
+        font-family: chalk;
+        font-weight: bold;
+        color: white;
+        margin: 0px;
+        margin-left: 50px;
+        padding: 10px;
+        font-size: 4em;
+        text-align: left;
+    }
+
+    li {
+        margin: 2px;
+    }
+
+    li:empty {
+        display: none;
+    }
+
+    dl {
+        flex: 100%;
+        width: 100%;
+        overflow: hidden;
+        padding: 10px;
+        margin: 50px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    dt {
+        font-size: 2em;
+        font-family: chalk;
+        color: white;
+        float: left;
+        flex: 25%;
+        width: 25%;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    dd {
+        font-family: chalk;
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+        float: left;
+        flex: 25%;
+        width: 25%;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    #mealInstructions {
+        color: white;
+        font-size: 2em;
+        margin: 50px;
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+</style>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="source.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="source.js"></script>
     <meta charset="utf-8">
@@ -11,22 +150,31 @@
 </head>
 
 <body>
-    <h1>Recipe Finder</h1>
     <div class="row">
         <div class="column">
             <h2>Search</h2>
-            <form>
-                <input type="text" id="inputField" value="">
-                <input id="searchButton" type="submit" value="Submit">
-            </form>
             <button onclick="randomRecipeFunction()">Random</button>
+            <div ng-app="" ng-init="firstName='recipe'">
+                <p>Search For a Recipe:</p>
+                <input type="text" id="inputField" ng-model="firstName" onkeyup="searchFunction()">
+                <p id="test">{{ firstName }}</p>
+            </div>
+            <div id="iValue">a</div>
         </div>
-        <div class="column">
-            <h2>Recipes</h2>
+        <div class="column" style="background-color: transparent;">
+            <h1>Recipe Finder</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column" style="flex:15%;">
+            <h2 class="specialHeader2">Recipes List</h2>
             <div id="search"></div>
-            <div id="title">None</div>
-            <p></p>
-            <div id="mealInstructions">None</div>
+        </div>
+        <div class="specialColumn">
+            <h2 style="font-family: chalk; color: white;">Recipe</h2>
+            <div id="title"></div>
+            <div id="ingredientsList"></div>
+            <div id="mealInstructions"></div>
         </div>
     </div>
 </body>
